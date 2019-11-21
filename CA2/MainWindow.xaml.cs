@@ -204,6 +204,7 @@ namespace CA2
                 txtBlkDescription.Text = "Nothing has been selected";
             
         }
+
         public void totalCost()                             //method to total up and display costs for selected activities
         {
             total = selActivities.Sum(item => item.Cost);
@@ -259,7 +260,6 @@ namespace CA2
                     {
                         filActivities.Add(activity);
                         filters = true;
-                        //SortAndDisplayFilteredLists();
                     }
                 }
                 SortAndDisplayFilteredLists();
@@ -272,7 +272,6 @@ namespace CA2
                     {
                         filActivities.Add(activity);
                         filters = true;
-                        //SortAndDisplayFilteredLists();
                     }
                 }
                 SortAndDisplayFilteredLists();
@@ -284,13 +283,11 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Air)
                     {
                         filActivities.Add(activity);
-                        filters = true;
-                        //SortAndDisplayFilteredLists();                       
+                        filters = true;                 
                     }
                 }
                 SortAndDisplayFilteredLists();
             }
         }
-
     }
 }

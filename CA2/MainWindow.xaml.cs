@@ -159,17 +159,14 @@ namespace CA2
                 selActivities.Add(selectedActivity);
                 if (filters == false)
                 {
+                    
                     SortAndDisplayLists();
                 }
                 if (filters == true)
                 {
+                    
                     SortAndDisplayFilteredLists();
                 }
-                //var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
-                //if (duplicates.Count() > 0)
-                //{
-                //    txtBlkDescription.Text = "Date Conflict detected";
-                //}
             }
             if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";
@@ -185,13 +182,15 @@ namespace CA2
             {
                 //move selected activity back to the All Activities list
                 selActivities.Remove(selectedActivity);
-                activities.Add(selectedActivity);
+                //activities.Add(selectedActivity);
                 if (filters == false)
                 {
+                    activities.Add(selectedActivity);
                     SortAndDisplayLists();
                 }
                 if (filters == true)
                 {
+                    filActivities.Add(selectedActivity);
                     SortAndDisplayFilteredLists();
                 }
             }
@@ -205,30 +204,24 @@ namespace CA2
             txtBlkTotalCost.Text = $"{total:#.00}";
         }
 
-        private void SortAndDisplayLists()
+        private void SortAndDisplayLists()                //sorts and displays the list of activities available
         {
             lstbxAllActivities.ItemsSource = null;
             activities.Sort();
             lstbxAllActivities.ItemsSource = activities;
-
-            lstBxSelectedActivities.ItemsSource = null;
-            selActivities.Sort();
-            lstBxSelectedActivities.ItemsSource = selActivities;
-            totalCost();
-            var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
-            if (duplicates.Count() > 0)
-            {
-                txtBlkDescription.Text = "Date Conflict detected";
-            }
-
+            SortAndDisplaySelectedLists();
         }
 
-        private void SortAndDisplayFilteredLists()
+        private void SortAndDisplayFilteredLists()    //sorts and displays the filtered list of activities available
         {
             lstbxAllActivities.ItemsSource = null;
             filActivities.Sort();
             lstbxAllActivities.ItemsSource = filActivities;
-
+            SortAndDisplaySelectedLists();           
+        }
+        
+        private void SortAndDisplaySelectedLists()  //sorts and displays the users chosen activities and checks for duplicate dates
+        {
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();
             lstBxSelectedActivities.ItemsSource = selActivities;

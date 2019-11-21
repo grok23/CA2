@@ -23,7 +23,7 @@ namespace CA2
         List<Activity> activities = new List<Activity>(); //create list to hold all activities available
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
-
+        decimal total = 0m;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace CA2
         {
             //List<Activity> activities = new List<Activity>();
             //List<Activity> selActivities = new List<Activity>();
+            
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -133,14 +134,25 @@ namespace CA2
         private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
-            //txtBlkDescription.Text = lstbxAllActivities.SelectedItem.Activity.Description();
+
+            Activity selected = lstbxAllActivities.SelectedItem as Activity;
+            if(selected!= null)
+            txtBlkDescription.Text = selected.Description;
+        }
+
+        private void lstBxSelectedActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
+
+            Activity selected = lstBxSelectedActivities.SelectedItem as Activity;
+            if (selected != null)
+            txtBlkDescription.Text = selected.Description;
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
             //will add the object selected from AllActivities to selActivities list
             Activity selectedActivity = lstbxAllActivities.SelectedItem as Activity;
-
 
             if (selectedActivity != null)
             {
@@ -149,15 +161,9 @@ namespace CA2
                 selActivities.Add(selectedActivity);
 
                 SortAndDisplayLists();
-
-                //lstbxAllActivities.ItemsSource = null;
-                //activities.Sort();
-                //lstbxAllActivities.ItemsSource = activities;
-
-                //lstBxSelectedActivities.ItemsSource = null;
-                //selActivities.Sort();
-                //lstBxSelectedActivities.ItemsSource = selActivities;
             }
+            else
+                txtBlkDescription.Text = "Nothing has been selected";
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -172,15 +178,9 @@ namespace CA2
                 activities.Add(selectedActivity);
 
                 SortAndDisplayLists();
-
-                //lstbxAllActivities.ItemsSource = null;
-                //activities.Sort();
-                //lstbxAllActivities.ItemsSource = activities;
-
-                //lstBxSelectedActivities.ItemsSource = null;
-                //selActivities.Sort();
-                //lstBxSelectedActivities.ItemsSource = selActivities;
             }
+            else
+                txtBlkDescription.Text = "Nothing has been selected";
         }
 
         private void SortAndDisplayLists()
@@ -192,18 +192,22 @@ namespace CA2
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();
             lstBxSelectedActivities.ItemsSource = selActivities;
+            total = selActivities.Sum(item => item.Cost);
+            txtBlkTotalCost.Text = $"{total:#.00}";
         }
 
-        //private void SortAndDisplayFilteredLists()
-        //{
-        //    lstbxAllActivities.ItemsSource = null;
-        //    filActivities.Sort();
-        //    lstbxAllActivities.ItemsSource = filActivities;
+        private void SortAndDisplayFilteredLists()
+        {
+            lstbxAllActivities.ItemsSource = null;
+            filActivities.Sort();
+            lstbxAllActivities.ItemsSource = filActivities;
 
-        //    lstBxSelectedActivities.ItemsSource = null;
-        //    selActivities.Sort();
-        //    lstBxSelectedActivities.ItemsSource = selActivities;
-        //}
+            lstBxSelectedActivities.ItemsSource = null;
+            selActivities.Sort();
+            lstBxSelectedActivities.ItemsSource = selActivities;
+            total = selActivities.Sum(item => item.Cost);
+            txtBlkTotalCost.Text = $"{total:#.00}";
+        }
 
         private void rBtnAll_Click(object sender, RoutedEventArgs e)
         {
@@ -223,11 +227,9 @@ namespace CA2
                     {
                         filActivities.Add(activity);
                         //SortAndDisplayFilteredLists();
-                        lstbxAllActivities.ItemsSource = null;
-                        //filActivities.Sort();
-                        lstbxAllActivities.ItemsSource = filActivities;
                     }
                 }
+                SortAndDisplayFilteredLists();
             }
             else if (rBtnWater.IsChecked == true)
             {
@@ -236,11 +238,10 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Water)
                     {
                         filActivities.Add(activity);
-                        lstbxAllActivities.ItemsSource = null;
-                        filActivities.Sort();
-                        lstbxAllActivities.ItemsSource = filActivities;
+                        //SortAndDisplayFilteredLists();
                     }
                 }
+                SortAndDisplayFilteredLists();
             }
             else if (rBtnAir.IsChecked == true)
             {
@@ -249,16 +250,12 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Air)
                     {
                         filActivities.Add(activity);
-                        lstbxAllActivities.ItemsSource = null;
-                        filActivities.Sort();
-                        lstbxAllActivities.ItemsSource = filActivities;
+                        //SortAndDisplayFilteredLists();                       
                     }
                 }
+                SortAndDisplayFilteredLists();
             }
-
         }
-
-        
 
     }
 }

@@ -155,16 +155,19 @@ namespace CA2
             if (selectedActivity != null)
             {
                 //move activity to selActivities list
-                activities.Remove(selectedActivity);
-                selActivities.Add(selectedActivity);
+                
+                //selActivities.Add(selectedActivity);
                 if (filters == false)
                 {
-                    
+                    activities.Remove(selectedActivity);
+                    selActivities.Add(selectedActivity);
                     SortAndDisplayLists();
                 }
                 if (filters == true)
                 {
-                    
+                    activities.Remove(selectedActivity);
+                    filActivities.Remove(selectedActivity);
+                    selActivities.Add(selectedActivity);
                     SortAndDisplayFilteredLists();
                 }
             }
@@ -190,7 +193,9 @@ namespace CA2
                 }
                 if (filters == true)
                 {
-                    filActivities.Add(selectedActivity);
+                    activities.Add(selectedActivity);
+                    //need to add an if to check if filtered activites are the same type as the  one being added back. possibly easier to just force radio button All back on and avoid the issue 
+                    filActivities.Add(selectedActivity);  //wrong type of activity can be added back to the filtered list, see above
                     SortAndDisplayFilteredLists();
                 }
             }

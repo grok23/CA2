@@ -189,15 +189,19 @@ namespace CA2
                 if (filters == false)
                 {
                     activities.Add(selectedActivity);
-                    SortAndDisplayLists();
+                    //SortAndDisplayLists();
                 }
                 if (filters == true)
                 {
+                    rBtnAll.IsChecked = true;
+                    filters = false;
                     activities.Add(selectedActivity);
                     //need to add an if to check if filtered activites are the same type as the  one being added back. possibly easier to just force radio button All back on and avoid the issue 
-                    filActivities.Add(selectedActivity);  //wrong type of activity can be added back to the filtered list, see above
-                    SortAndDisplayFilteredLists();
+                    //filActivities.Add(selectedActivity);  //wrong type of activity can be added back to the filtered list, see above
+                    //SortAndDisplayFilteredLists();
+                    //SortAndDisplayLists();
                 }
+                SortAndDisplayLists();
             }
             if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";

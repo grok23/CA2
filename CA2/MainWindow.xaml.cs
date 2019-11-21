@@ -24,6 +24,8 @@ namespace CA2
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
         decimal total = 0.00m;
+        bool filters = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,9 +33,7 @@ namespace CA2
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<Activity> activities = new List<Activity>();
-            //List<Activity> selActivities = new List<Activity>();
-            
+
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -134,19 +134,17 @@ namespace CA2
         private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
-
             Activity selected = lstbxAllActivities.SelectedItem as Activity;
-            if(selected!= null)
-            txtBlkDescription.Text = selected.Description;
+            if (selected != null)
+                txtBlkDescription.Text = selected.Description;
         }
 
         private void lstBxSelectedActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
-
             Activity selected = lstBxSelectedActivities.SelectedItem as Activity;
             if (selected != null)
-            txtBlkDescription.Text = selected.Description;
+                txtBlkDescription.Text = selected.Description;
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
@@ -159,11 +157,23 @@ namespace CA2
                 //move activity to selActivities list
                 activities.Remove(selectedActivity);
                 selActivities.Add(selectedActivity);
-               
-               SortAndDisplayLists();
+                if (filters == false)
+                {
+                    SortAndDisplayLists();
+                }
+                if (filters == true)
+                {
+                    SortAndDisplayFilteredLists();
+                }
+                //var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
+                //if (duplicates.Count() > 0)
+                //{
+                //    txtBlkDescription.Text = "Date Conflict detected";
+                //}
             }
-            
+            if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";
+            
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -176,11 +186,23 @@ namespace CA2
                 //move selected activity back to the All Activities list
                 selActivities.Remove(selectedActivity);
                 activities.Add(selectedActivity);
-                
-                SortAndDisplayLists();
+                if (filters == false)
+                {
+                    SortAndDisplayLists();
+                }
+                if (filters == true)
+                {
+                    SortAndDisplayFilteredLists();
+                }
             }
-            
+            if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";
+            
+        }
+        public void totalCost()   //method to total up and display costs for selected activities
+        {
+            total = selActivities.Sum(item => item.Cost);
+            txtBlkTotalCost.Text = $"{total:#.00}";
         }
 
         private void SortAndDisplayLists()
@@ -192,8 +214,13 @@ namespace CA2
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();
             lstBxSelectedActivities.ItemsSource = selActivities;
-            total = selActivities.Sum(item => item.Cost);
-            txtBlkTotalCost.Text = $"{total:#.00}";
+            totalCost();
+            var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
+            if (duplicates.Count() > 0)
+            {
+                txtBlkDescription.Text = "Date Conflict detected";
+            }
+
         }
 
         private void SortAndDisplayFilteredLists()
@@ -205,8 +232,13 @@ namespace CA2
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();
             lstBxSelectedActivities.ItemsSource = selActivities;
-            total = selActivities.Sum(item => item.Cost);
-            txtBlkTotalCost.Text = $"{total:#.00}";
+            totalCost();
+            var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
+            if (duplicates.Count() > 0)
+            {
+                txtBlkDescription.Text = "Date Conflict detected";
+            }
+
         }
 
         private void rBtnAll_Click(object sender, RoutedEventArgs e)
@@ -218,6 +250,7 @@ namespace CA2
             {
                 //display and sort both unfiltered lists
                 SortAndDisplayLists();
+                filters = false;
             }
             else if (rBtnLand.IsChecked == true)
             {
@@ -226,6 +259,7 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Land)
                     {
                         filActivities.Add(activity);
+                        filters = true;
                         //SortAndDisplayFilteredLists();
                     }
                 }
@@ -238,6 +272,7 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Water)
                     {
                         filActivities.Add(activity);
+                        filters = true;
                         //SortAndDisplayFilteredLists();
                     }
                 }
@@ -250,6 +285,7 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Air)
                     {
                         filActivities.Add(activity);
+                        filters = true;
                         //SortAndDisplayFilteredLists();                       
                     }
                 }

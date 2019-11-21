@@ -20,6 +20,10 @@ namespace CA2
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Activity> activities = new List<Activity>(); //create list to hold all activities available
+        List<Activity> selActivities = new List<Activity>();
+        List<Activity> filActivities = new List<Activity>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,8 +31,8 @@ namespace CA2
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Activity> activities = new List<Activity>();
-            List<Activity> selActivities = new List<Activity>();
+            //List<Activity> activities = new List<Activity>();
+            //List<Activity> selActivities = new List<Activity>();
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -109,6 +113,8 @@ namespace CA2
                 TypeOfActivity = ActivityType.Air,
                 Cost = 200m
             };
+
+            //add the above activities to the all activities list
             activities.Add(l1);
             activities.Add(l2);
             activities.Add(l3);
@@ -119,30 +125,140 @@ namespace CA2
             activities.Add(a2);
             activities.Add(a3);
 
-            activities.Sort();  //sorts the activities list by date order using the icomparable compareTo
-            lstbxAllActivities.ItemsSource = activities;
+            activities.Sort();  //sorts the all activities list by date order using the icomparable compareTo
+            lstbxAllActivities.ItemsSource = activities; //assign All activities list as the itemsource for the appropiate listbox
             lstBxSelectedActivities.ItemsSource = selActivities;
         }
 
         private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
-            //   txtBlkDescription.Text = lstbxAllActivities.SelectedItem.Description();
+            //txtBlkDescription.Text = lstbxAllActivities.SelectedItem.Activity.Description();
         }
 
         private void btnRight_Click(object sender, RoutedEventArgs e)
         {
             //will add the object selected from AllActivities to selActivities list
-            //   selActivities.Add();
+            Activity selectedActivity = lstbxAllActivities.SelectedItem as Activity;
+
+
+            if (selectedActivity != null)
+            {
+                //move activity to selActivities list
+                activities.Remove(selectedActivity);
+                selActivities.Add(selectedActivity);
+
+                SortAndDisplayLists();
+
+                //lstbxAllActivities.ItemsSource = null;
+                //activities.Sort();
+                //lstbxAllActivities.ItemsSource = activities;
+
+                //lstBxSelectedActivities.ItemsSource = null;
+                //selActivities.Sort();
+                //lstBxSelectedActivities.ItemsSource = selActivities;
+            }
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
         {
             //will remove the object selected from selected Activities list and put it back in the AllActivities list
-            //   Activities.Add();
+            Activity selectedActivity = lstBxSelectedActivities.SelectedItem as Activity;
+
+            if (selectedActivity != null)
+            {
+                //move selected activity back to the All Activities list
+                selActivities.Remove(selectedActivity);
+                activities.Add(selectedActivity);
+
+                SortAndDisplayLists();
+
+                //lstbxAllActivities.ItemsSource = null;
+                //activities.Sort();
+                //lstbxAllActivities.ItemsSource = activities;
+
+                //lstBxSelectedActivities.ItemsSource = null;
+                //selActivities.Sort();
+                //lstBxSelectedActivities.ItemsSource = selActivities;
+            }
         }
 
+        private void SortAndDisplayLists()
+        {
+            lstbxAllActivities.ItemsSource = null;
+            activities.Sort();
+            lstbxAllActivities.ItemsSource = activities;
 
+            lstBxSelectedActivities.ItemsSource = null;
+            selActivities.Sort();
+            lstBxSelectedActivities.ItemsSource = selActivities;
+        }
+
+        //private void SortAndDisplayFilteredLists()
+        //{
+        //    lstbxAllActivities.ItemsSource = null;
+        //    filActivities.Sort();
+        //    lstbxAllActivities.ItemsSource = filActivities;
+
+        //    lstBxSelectedActivities.ItemsSource = null;
+        //    selActivities.Sort();
+        //    lstBxSelectedActivities.ItemsSource = selActivities;
+        //}
+
+        private void rBtnAll_Click(object sender, RoutedEventArgs e)
+        {
+            //clear filActivities list first
+            filActivities.Clear();
+
+            if (rBtnAll.IsChecked == true)
+            {
+                //display and sort both unfiltered lists
+                SortAndDisplayLists();
+            }
+            else if (rBtnLand.IsChecked == true)
+            {
+                foreach (Activity activity in activities)
+                {
+                    if (activity.TypeOfActivity == ActivityType.Land)
+                    {
+                        filActivities.Add(activity);
+                        //SortAndDisplayFilteredLists();
+                        lstbxAllActivities.ItemsSource = null;
+                        //filActivities.Sort();
+                        lstbxAllActivities.ItemsSource = filActivities;
+                    }
+                }
+            }
+            else if (rBtnWater.IsChecked == true)
+            {
+                foreach (Activity activity in activities)
+                {
+                    if (activity.TypeOfActivity == ActivityType.Water)
+                    {
+                        filActivities.Add(activity);
+                        lstbxAllActivities.ItemsSource = null;
+                        filActivities.Sort();
+                        lstbxAllActivities.ItemsSource = filActivities;
+                    }
+                }
+            }
+            else if (rBtnAir.IsChecked == true)
+            {
+                foreach (Activity activity in activities)
+                {
+                    if (activity.TypeOfActivity == ActivityType.Air)
+                    {
+                        filActivities.Add(activity);
+                        lstbxAllActivities.ItemsSource = null;
+                        filActivities.Sort();
+                        lstbxAllActivities.ItemsSource = filActivities;
+                    }
+                }
+            }
+
+        }
+
+        
 
     }
 }

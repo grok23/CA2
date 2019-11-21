@@ -16,10 +16,10 @@
         <TextBlock x:Name="txtBlkTotalCost" HorizontalAlignment="Left" Margin="830,38,0,0" TextWrapping="Wrap" Text="$##.##" Height="32" Width="75" RenderTransformOrigin="0.533,0.846" VerticalAlignment="Top"/>
         <Button x:Name="btnRight" Content="&gt; &gt;" HorizontalAlignment="Left" Margin="500,185,0,0" VerticalAlignment="Top" Width="75" Click="btnRight_Click"/>
         <Button x:Name="btnLeft" Content="&lt; &lt;" HorizontalAlignment="Left" Margin="500,255,0,0" VerticalAlignment="Top" Width="75" Click="btnLeft_Click"/>
-        <RadioButton x:Name="rBtnAll" Content="All" HorizontalAlignment="Left" Margin="60,125,0,0" VerticalAlignment="Top" IsChecked="True" RenderTransformOrigin="0.455,1.667"/>
-        <RadioButton x:Name="rBtnLand" Content="Land" HorizontalAlignment="Left" Margin="60,173,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rBtn" Content="Water" HorizontalAlignment="Left" Margin="60,225,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rBtnAir" Content="Air" HorizontalAlignment="Left" Margin="60,280,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rBtnAll" Content="All" HorizontalAlignment="Left" Margin="60,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.455,1.667" Click="rBtnAll_Click"/>
+        <RadioButton x:Name="rBtnLand" Content="Land" HorizontalAlignment="Left" Margin="60,173,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
+        <RadioButton x:Name="rBtnWater" Content="Water" HorizontalAlignment="Left" Margin="60,225,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
+        <RadioButton x:Name="rBtnAir" Content="Air" HorizontalAlignment="Left" Margin="60,280,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
         <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="205,445,0,0" VerticalAlignment="Top" Width="140" Height="30"/>
         <TextBlock x:Name="txtBlkDescription" HorizontalAlignment="Left" Margin="205,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" Width="500"/>
 

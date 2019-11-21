@@ -159,10 +159,10 @@ namespace CA2
                 //move activity to selActivities list
                 activities.Remove(selectedActivity);
                 selActivities.Add(selectedActivity);
-
-                SortAndDisplayLists();
+               
+               SortAndDisplayLists();
             }
-            else
+            
                 txtBlkDescription.Text = "Nothing has been selected";
         }
 
@@ -176,10 +176,10 @@ namespace CA2
                 //move selected activity back to the All Activities list
                 selActivities.Remove(selectedActivity);
                 activities.Add(selectedActivity);
-
+                
                 SortAndDisplayLists();
             }
-            else
+            
                 txtBlkDescription.Text = "Nothing has been selected";
         }
 

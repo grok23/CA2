@@ -16,7 +16,7 @@ namespace CA2
         private string _Description;
         public string Description
         {
-            get { return _Description + "Cost - {Cost}"; }
+            get { return _Description + $"Cost - {Cost}"; }
             set { _Description = value; }
         }
         public ActivityType TypeOfActivity { get; set; }

@@ -20,6 +20,7 @@ namespace CA2
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         List<Activity> activities = new List<Activity>(); //create list to hold all activities available
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
@@ -28,6 +29,7 @@ namespace CA2
 
         public MainWindow()
         {
+            Encoding OutputEncoding = Encoding.UTF8;
             InitializeComponent();
         }
 
@@ -185,21 +187,16 @@ namespace CA2
             {
                 //move selected activity back to the All Activities list
                 selActivities.Remove(selectedActivity);
-                //activities.Add(selectedActivity);
+  
                 if (filters == false)
                 {
                     activities.Add(selectedActivity);
-                    //SortAndDisplayLists();
                 }
                 if (filters == true)
                 {
                     rBtnAll.IsChecked = true;
                     filters = false;
                     activities.Add(selectedActivity);
-                    //need to add an if to check if filtered activites are the same type as the  one being added back. possibly easier to just force radio button All back on and avoid the issue 
-                    //filActivities.Add(selectedActivity);  //wrong type of activity can be added back to the filtered list, see above
-                    //SortAndDisplayFilteredLists();
-                    //SortAndDisplayLists();
                 }
                 SortAndDisplayLists();
             }
@@ -207,13 +204,13 @@ namespace CA2
                 txtBlkDescription.Text = "Nothing has been selected";
             
         }
-        public void totalCost()   //method to total up and display costs for selected activities
+        public void totalCost()                             //method to total up and display costs for selected activities
         {
             total = selActivities.Sum(item => item.Cost);
-            txtBlkTotalCost.Text = $"{total:#.00}";
+            txtBlkTotalCost.Text = $"{total:C}";
         }
 
-        private void SortAndDisplayLists()                //sorts and displays the list of activities available
+        private void SortAndDisplayLists()                  //sorts and displays the list of activities available
         {
             lstbxAllActivities.ItemsSource = null;
             activities.Sort();
@@ -221,7 +218,7 @@ namespace CA2
             SortAndDisplaySelectedLists();
         }
 
-        private void SortAndDisplayFilteredLists()    //sorts and displays the filtered list of activities available
+        private void SortAndDisplayFilteredLists()          //sorts and displays the filtered list of activities available
         {
             lstbxAllActivities.ItemsSource = null;
             filActivities.Sort();
@@ -229,7 +226,7 @@ namespace CA2
             SortAndDisplaySelectedLists();           
         }
         
-        private void SortAndDisplaySelectedLists()  //sorts and displays the users chosen activities and checks for duplicate dates
+        private void SortAndDisplaySelectedLists()          //sorts and displays the users chosen activities and checks for duplicate dates
         {
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();

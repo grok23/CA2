@@ -23,7 +23,7 @@ namespace CA2
         List<Activity> activities = new List<Activity>(); //create list to hold all activities available
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
-        decimal total = 0m;
+        decimal total = 0.00m;
         public MainWindow()
         {
             InitializeComponent();

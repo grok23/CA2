@@ -1,11 +1,11 @@
-﻿<Window x:Class="CA2.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="CA2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2"
         mc:Ignorable="d"
-        Title="Activity Planner" Height="650" Width="1000">
+        Title="Activity Planner" Height="650" Width="1000" Loaded="MainWindow1_Loaded">
     <Grid>
         <ListBox x:Name="lstbxAllActivities" HorizontalAlignment="Left" Height="250" Margin="205,125,0,0" VerticalAlignment="Top" Width="250"/>
         <ListBox x:Name="lstBxSelectedActivities" HorizontalAlignment="Left" Height="250" Margin="655,125,0,0" VerticalAlignment="Top" Width="250"/>

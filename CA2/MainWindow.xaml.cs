@@ -28,6 +28,7 @@ namespace CA2
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
             List<Activity> activities = new List<Activity>();
+            List<Activity> selActivities = new List<Activity>();
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -118,7 +119,30 @@ namespace CA2
             activities.Add(a2);
             activities.Add(a3);
 
+            activities.Sort();  //sorts the activities list by date order using the icomparable compareTo
             lstbxAllActivities.ItemsSource = activities;
+            lstBxSelectedActivities.ItemsSource = selActivities;
         }
+
+        private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
+            //   txtBlkDescription.Text = lstbxAllActivities.SelectedItem.Description();
+        }
+
+        private void btnRight_Click(object sender, RoutedEventArgs e)
+        {
+            //will add the object selected from AllActivities to selActivities list
+            //   selActivities.Add();
+        }
+
+        private void btnLeft_Click(object sender, RoutedEventArgs e)
+        {
+            //will remove the object selected from selected Activities list and put it back in the AllActivities list
+            //   Activities.Add();
+        }
+
+
+
     }
 }

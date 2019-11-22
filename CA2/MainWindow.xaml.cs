@@ -28,7 +28,7 @@ namespace CA2
 
         public MainWindow()
         {
-            Encoding OutputEncoding = Encoding.UTF8;
+            Encoding OutputEncoding = Encoding.UTF8;  //set encoding to utf8 to allow for display of euro symbol
             InitializeComponent();
         }
 

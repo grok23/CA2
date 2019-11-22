@@ -16,11 +16,10 @@ using System.Windows.Shapes;
 namespace CA2
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml by Alasdair Macdonald
     /// </summary>
     public partial class MainWindow : Window
     {
-        
         List<Activity> activities = new List<Activity>(); //create list to hold all activities available
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
@@ -35,7 +34,6 @@ namespace CA2
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
-
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -75,7 +73,7 @@ namespace CA2
             Activity w2 = new Activity()
             {
                 Name = "Surfing",
-                Description = "2 hour surf lesson on the wild atlantic way",
+                Description = "2 hour surf lesson on the wild atlantic way.",
                 ActivityDate = new DateTime(2019, 06, 02),
                 TypeOfActivity = ActivityType.Water,
                 Cost = 25m
@@ -111,7 +109,7 @@ namespace CA2
             Activity a3 = new Activity()
             {
                 Name = "Helicopter Tour",
-                Description = "Experience the ultimate in aerial sight-seeing as you tour the area in our modern helicopters",
+                Description = "Experience the ultimate in aerial sight-seeing as you tour the area in our modern helicopters.",
                 ActivityDate = new DateTime(2019, 06, 03),
                 TypeOfActivity = ActivityType.Air,
                 Cost = 200m
@@ -157,7 +155,6 @@ namespace CA2
             if (selectedActivity != null)
             {
                 //move activity to selActivities list
-                
                 //selActivities.Add(selectedActivity);
                 if (filters == false)
                 {
@@ -175,7 +172,6 @@ namespace CA2
             }
             if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";
-            
         }
 
         private void btnLeft_Click(object sender, RoutedEventArgs e)
@@ -202,7 +198,6 @@ namespace CA2
             }
             if (selectedActivity == null)
                 txtBlkDescription.Text = "Nothing has been selected";
-            
         }
 
         public void totalCost()                             //method to total up and display costs for selected activities
@@ -233,15 +228,16 @@ namespace CA2
             selActivities.Sort();
             lstBxSelectedActivities.ItemsSource = selActivities;
             totalCost();
+            
+            //duplicate date check
             var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
             if (duplicates.Count() > 0)
             {
                 txtBlkDescription.Text = "Date Conflict detected";
             }
-
         }
 
-        private void rBtnAll_Click(object sender, RoutedEventArgs e)
+        private void rBtnAll_Click(object sender, RoutedEventArgs e)  //radio buttons for filtering activities lists
         {
             //clear filActivities list first
             filActivities.Clear();

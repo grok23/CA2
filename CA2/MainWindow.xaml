@@ -10,8 +10,8 @@
         <ListBox x:Name="lstbxAllActivities" HorizontalAlignment="Left" Height="250" Margin="205,125,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="lstbxAllActivities_SelectionChanged"/>
         <ListBox x:Name="lstBxSelectedActivities" HorizontalAlignment="Left" Height="250" Margin="655,125,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="lstBxSelectedActivities_SelectionChanged"/>
         <Label x:Name="lblTitle" Content="Activity Planner" HorizontalAlignment="Left" Margin="205,20,0,0" VerticalAlignment="Top" Width="250" Height="45" FontSize="24" Foreground="#FF617CDA" FontWeight="Bold"/>
-        <Label x:Name="lblAll" Content="All Activities" HorizontalAlignment="Left" Margin="205,99,0,0" VerticalAlignment="Top" Width="175"/>
-        <Label x:Name="lblSelected" Content="Selected Activities" HorizontalAlignment="Left" Margin="655,99,0,0" VerticalAlignment="Top" Width="175"/>
+        <Label x:Name="lblAll" Content="All Activities" HorizontalAlignment="Left" Margin="205,99,0,0" VerticalAlignment="Top" Width="175" FontSize="16"/>
+        <Label x:Name="lblSelected" Content="Selected Activities" HorizontalAlignment="Left" Margin="655,99,0,0" VerticalAlignment="Top" Width="175" FontSize="16"/>
         <Label x:Name="lblTotalCost" Content="Total Cost" HorizontalAlignment="Left" Margin="655,33,0,0" VerticalAlignment="Top" Width="125" Height="32"/>
         <TextBlock x:Name="txtBlkTotalCost" HorizontalAlignment="Left" Margin="830,38,0,0" TextWrapping="Wrap" Height="32" Width="75" RenderTransformOrigin="0.533,0.846" VerticalAlignment="Top"/>
         <Button x:Name="btnRight" Content="&gt; &gt;" HorizontalAlignment="Left" Margin="500,185,0,0" VerticalAlignment="Top" Width="75" Click="btnRight_Click"/>
@@ -20,8 +20,8 @@
         <RadioButton x:Name="rBtnLand" Content="Land" HorizontalAlignment="Left" Margin="60,173,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
         <RadioButton x:Name="rBtnWater" Content="Water" HorizontalAlignment="Left" Margin="60,225,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
         <RadioButton x:Name="rBtnAir" Content="Air" HorizontalAlignment="Left" Margin="60,280,0,0" VerticalAlignment="Top" Click="rBtnAll_Click"/>
-        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="205,445,0,0" VerticalAlignment="Top" Width="140" Height="30"/>
-        <TextBlock x:Name="txtBlkDescription" HorizontalAlignment="Left" Margin="205,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" Width="500"/>
+        <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" Margin="200,445,0,0" VerticalAlignment="Top" Width="140" Height="30" FontSize="16"/>
+        <TextBlock x:Name="txtBlkDescription" HorizontalAlignment="Left" Margin="205,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" Width="700" FontSize="16"/>
 
     </Grid>
 </Window>

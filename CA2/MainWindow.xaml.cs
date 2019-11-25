@@ -24,6 +24,7 @@ namespace CA2
         List<Activity> activities = new List<Activity>(); 
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
+
         //declare variables for total cost of activities and a boolean to track if filtering of lists has been enabled 
         decimal total = 0.00m;
         bool filters = false;
@@ -254,7 +255,7 @@ namespace CA2
         }
 
         //methods to sort and display information
-        public void totalCost()                             //method to total up and display costs for selected activities
+        private void totalCost()                             //method to total up and display costs for selected activities
         {
             total = selActivities.Sum(item => item.Cost);
             txtBlkTotalCost.Text = $"{total:C}";

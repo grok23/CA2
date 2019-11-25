@@ -28,13 +28,14 @@ namespace CA2
         decimal total = 0.00m;
         bool filters = false;
 
-        public MainWindow()
+        //initialise window and load objects
+        public MainWindow()                                 //initialise components and set encoding to allow for non $ currency
         {
-            Encoding OutputEncoding = Encoding.UTF8;  //set encoding to utf8 to allow for display of euro symbol
+            Encoding OutputEncoding = Encoding.UTF8;        //set encoding to utf8 to allow for display of euro symbol
             InitializeComponent();
         }
 
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) //create activity objects and add them to list/sort according to date
         {
             //activity objects are created
             Activity l1 = new Activity()
@@ -134,6 +135,7 @@ namespace CA2
             lstBxSelectedActivities.ItemsSource = selActivities;
         }
 
+        //listbox selections
         private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
@@ -141,7 +143,7 @@ namespace CA2
             if (selected != null)
                 txtBlkDescription.Text = selected.Description;
         }
-
+       
         private void lstBxSelectedActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
@@ -150,95 +152,8 @@ namespace CA2
                 txtBlkDescription.Text = selected.Description;
         }
 
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            //will add the object selected from AllActivities to selActivities list
-            Activity selectedActivity = lstbxAllActivities.SelectedItem as Activity;
-
-            if (selectedActivity != null)    //checks if an activity has been selected and then adds/removes from relevant lists
-            {
-                if (filters == false)
-                {
-                    activities.Remove(selectedActivity);
-                    selActivities.Add(selectedActivity);
-                    SortAndDisplayLists();
-                }
-                if (filters != false)
-                {
-                    activities.Remove(selectedActivity);
-                    filActivities.Remove(selectedActivity);
-                    selActivities.Add(selectedActivity);
-                    SortAndDisplayFilteredLists();
-                }
-            }
-            if (selectedActivity == null)
-                txtBlkDescription.Text = "Nothing has been selected";
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            //will remove the object selected from selected Activities list and put it back in the AllActivities list
-            Activity selectedActivity = lstBxSelectedActivities.SelectedItem as Activity;
-
-            if (selectedActivity != null)
-            {
-                //move selected activity back to the All Activities list
-                selActivities.Remove(selectedActivity);
-  
-                if (filters == false)
-                {
-                    activities.Add(selectedActivity);
-                }
-                if (filters == true)
-                {
-                    rBtnAll.IsChecked = true;
-                    filters = false;
-                    activities.Add(selectedActivity);
-                }
-                SortAndDisplayLists();
-            }
-            if (selectedActivity == null)
-                txtBlkDescription.Text = "Nothing has been selected";
-        }
-
-        public void totalCost()                             //method to total up and display costs for selected activities
-        {
-            total = selActivities.Sum(item => item.Cost);
-            txtBlkTotalCost.Text = $"{total:C}";
-        }
-
-        private void SortAndDisplayLists()                  //sorts and displays the list of activities available
-        {
-            lstbxAllActivities.ItemsSource = null;
-            activities.Sort();
-            lstbxAllActivities.ItemsSource = activities;
-            SortAndDisplaySelectedLists();
-        }
-
-        private void SortAndDisplayFilteredLists()          //sorts and displays the filtered list of activities available
-        {
-            lstbxAllActivities.ItemsSource = null;
-            filActivities.Sort();
-            lstbxAllActivities.ItemsSource = filActivities;
-            SortAndDisplaySelectedLists();           
-        }
-        
-        private void SortAndDisplaySelectedLists()          //sorts and displays the users chosen activities and checks for duplicate dates
-        {
-            lstBxSelectedActivities.ItemsSource = null;
-            selActivities.Sort();
-            lstBxSelectedActivities.ItemsSource = selActivities;
-            totalCost();
-            
-            //duplicate date check
-            var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
-            if (duplicates.Count() > 0)
-            {
-                txtBlkDescription.Text = "Date Conflict detected";
-            }
-        }
-
-        private void rBtnAll_Click(object sender, RoutedEventArgs e)  //radio buttons for filtering activities lists
+        //controls on the form: add/remove and radio buttons
+        private void rBtnAll_Click(object sender, RoutedEventArgs e)    //radio buttons for filtering activities lists
         {
             //clear filActivities list first
             filActivities.Clear();
@@ -280,11 +195,102 @@ namespace CA2
                     if (activity.TypeOfActivity == ActivityType.Air)
                     {
                         filActivities.Add(activity);
-                        filters = true;                 
+                        filters = true;
                     }
                 }
                 SortAndDisplayFilteredLists();
             }
         }
+
+        private void btnRight_Click(object sender, RoutedEventArgs e)   //button to move activites to the right hand listbox   
+        {
+            //will add the object selected from AllActivities to selActivities list
+            Activity selectedActivity = lstbxAllActivities.SelectedItem as Activity;
+
+            if (selectedActivity != null)    //checks if an activity has been selected and then adds/removes from relevant lists
+            {
+                if (filters == false)
+                {
+                    activities.Remove(selectedActivity);
+                    selActivities.Add(selectedActivity);
+                    SortAndDisplayLists();
+                }
+                if (filters != false)
+                {
+                    activities.Remove(selectedActivity);
+                    filActivities.Remove(selectedActivity);
+                    selActivities.Add(selectedActivity);
+                    SortAndDisplayFilteredLists();
+                }
+            }
+            if (selectedActivity == null)
+                txtBlkDescription.Text = "Nothing has been selected";
+        }
+
+        private void btnLeft_Click(object sender, RoutedEventArgs e)    //button to move activites to the left hand listbox 
+        {
+            //will remove the object selected from selected Activities list and put it back in the AllActivities list
+            Activity selectedActivity = lstBxSelectedActivities.SelectedItem as Activity;
+
+            if (selectedActivity != null)
+            {
+                //move selected activity back to the All Activities list
+                selActivities.Remove(selectedActivity);
+  
+                if (filters == false)
+                {
+                    activities.Add(selectedActivity);
+                }
+                if (filters == true)
+                {
+                    rBtnAll.IsChecked = true;
+                    filters = false;
+                    activities.Add(selectedActivity);
+                }
+                SortAndDisplayLists();
+            }
+            if (selectedActivity == null)
+                txtBlkDescription.Text = "Nothing has been selected";
+        }
+
+        //methods to sort and display information
+        public void totalCost()                             //method to total up and display costs for selected activities
+        {
+            total = selActivities.Sum(item => item.Cost);
+            txtBlkTotalCost.Text = $"{total:C}";
+        }
+
+        private void SortAndDisplayLists()                  //sorts and displays the list of activities available
+        {
+            lstbxAllActivities.ItemsSource = null;
+            activities.Sort();
+            lstbxAllActivities.ItemsSource = activities;
+            SortAndDisplaySelectedLists();
+        }
+
+        private void SortAndDisplayFilteredLists()          //sorts and displays the filtered list of activities available
+        {
+            lstbxAllActivities.ItemsSource = null;
+            filActivities.Sort();
+            lstbxAllActivities.ItemsSource = filActivities;
+            SortAndDisplaySelectedLists();           
+        }
+        
+        private void SortAndDisplaySelectedLists()          //sorts and displays the users chosen activities and checks for duplicate dates
+        {
+            lstBxSelectedActivities.ItemsSource = null;
+            selActivities.Sort();
+            lstBxSelectedActivities.ItemsSource = selActivities;
+            totalCost();
+            
+            //duplicate date check
+            var duplicates = selActivities.GroupBy(item => item.ActivityDate).Where(g => g.Count() > 1).Select(g => g.Key);
+            if (duplicates.Count() > 0)
+            {
+                txtBlkDescription.Text = "Date Conflict detected";
+            }
+        }
+
+       
     }
 }

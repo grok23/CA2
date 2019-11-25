@@ -20,9 +20,11 @@ namespace CA2
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Activity> activities = new List<Activity>(); //create list to hold all activities available
+        //create lists to hold all activities available, selecteed activites and filtered activities
+        List<Activity> activities = new List<Activity>(); 
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
+        //declare variables for total cost of activities and a boolean to track if filtering of lists has been enabled 
         decimal total = 0.00m;
         bool filters = false;
 
@@ -34,6 +36,7 @@ namespace CA2
 
         private void MainWindow1_Loaded(object sender, RoutedEventArgs e)
         {
+            //activity objects are created
             Activity l1 = new Activity()
             {
                 Name = "Treking",
@@ -152,17 +155,15 @@ namespace CA2
             //will add the object selected from AllActivities to selActivities list
             Activity selectedActivity = lstbxAllActivities.SelectedItem as Activity;
 
-            if (selectedActivity != null)
+            if (selectedActivity != null)    //checks if an activity has been selected and then adds/removes from relevant lists
             {
-                //move activity to selActivities list
-                //selActivities.Add(selectedActivity);
                 if (filters == false)
                 {
                     activities.Remove(selectedActivity);
                     selActivities.Add(selectedActivity);
                     SortAndDisplayLists();
                 }
-                if (filters == true)
+                if (filters != false)
                 {
                     activities.Remove(selectedActivity);
                     filActivities.Remove(selectedActivity);

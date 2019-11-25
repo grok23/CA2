@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CA2
 {
+    //declare Activity types as enum
     public enum ActivityType { Air, Water, Land } 
 
     public class Activity: IComparable
@@ -29,10 +30,9 @@ namespace CA2
             //get reference to next object in list
             Activity objectToCompareTo = obj as Activity;
 
-            //indicate which field to compare to
+            //compare to is set to compare the ActivityDate
             int returnValue = this.ActivityDate.CompareTo(objectToCompareTo.ActivityDate);
             return returnValue;
-            //throw new NotImplementedException();
         }
 
         public override string ToString()

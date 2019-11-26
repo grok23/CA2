@@ -36,7 +36,16 @@ namespace CA2
             InitializeComponent();
         }
 
-        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) //create activity objects and add them to list/sort according to date
+        private void MainWindow1_Loaded(object sender, RoutedEventArgs e) //create activity objects list and sort it according to date
+        {
+            
+            CreateActivities();
+            activities.Sort();                              //sorts the all activities list by date order using the icomparable compareTo
+            lstbxAllActivities.ItemsSource = activities;    //assign All activities list as the itemsource for the appropiate listbox
+            lstBxSelectedActivities.ItemsSource = selActivities;
+        }
+
+        private List<Activity> CreateActivities()           //method to create and return the list of activities
         {
             //activity objects are created
             Activity l1 = new Activity()
@@ -120,6 +129,19 @@ namespace CA2
                 Cost = 200m
             };
 
+            Activity t1 = new Activity()
+            {
+                Name = "Helicopter Tour2",
+                
+            };
+
+            Activity t2 = new Activity()
+            {
+                
+
+            };
+
+
             //add the above activities to the all activities list
             activities.Add(l1);
             activities.Add(l2);
@@ -130,10 +152,11 @@ namespace CA2
             activities.Add(a1);
             activities.Add(a2);
             activities.Add(a3);
+            activities.Add(t1);
+            activities.Add(t2);
 
-            activities.Sort();  //sorts the all activities list by date order using the icomparable compareTo
-            lstbxAllActivities.ItemsSource = activities; //assign All activities list as the itemsource for the appropiate listbox
-            lstBxSelectedActivities.ItemsSource = selActivities;
+            //return the completed list
+            return activities;
         }
 
         //listbox selections

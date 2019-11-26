@@ -29,11 +29,13 @@ namespace CA2
         {
         }
 
+
         public Activity(string name, object dt, object cst, string desc) 
         {
-            
+            Name = name;
         }
-        public Activity(string name) : this(name, null, null, "")  //chained constructor that takes name only
+
+        public Activity(string name) : this(name, null, null, "")                      //chained constructor that takes name only
         {
 
         }

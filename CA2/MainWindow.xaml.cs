@@ -254,8 +254,8 @@ namespace CA2
                 txtBlkDescription.Text = "Nothing has been selected";
         }
 
-        //methods to sort and display information
-        private void totalCost()                             //method to total up and display costs for selected activities
+        //methods to sort/calculate and display information
+        private void totalCost()                            //method to total up and display costs for selected activities
         {
             total = selActivities.Sum(item => item.Cost);
             txtBlkTotalCost.Text = $"{total:C}";

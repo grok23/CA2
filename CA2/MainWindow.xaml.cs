@@ -32,7 +32,7 @@ namespace CA2
         //initialise window and load objects
         public MainWindow()                                 //initialise components and set encoding to allow for non $ currency
         {
-            Encoding OutputEncoding = Encoding.UTF8;        //set encoding to utf8 to allow for display of euro symbol
+            Encoding OutputEncoding = Encoding.UTF8;        //set encoding to utf8 to allow for display of euro/pound symbol
             InitializeComponent();
         }
 
@@ -137,17 +137,17 @@ namespace CA2
         }
 
         //listbox selections
-        private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstbxAllActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)  //all activities list block
         {
-            //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
+            //allows for an object to be selected from the list and displays the description in the txtBlkDescription text block
             Activity selected = lstbxAllActivities.SelectedItem as Activity;
             if (selected != null)
                 txtBlkDescription.Text = selected.Description;
         }
        
-        private void lstBxSelectedActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstBxSelectedActivities_SelectionChanged(object sender, SelectionChangedEventArgs e) //selected activities list block
         {
-            //will allow for an object to be selected from the list and display the description in the txtBlkDescription text block
+            //allows for an object to be selected from the list and displays the description in the txtBlkDescription text block
             Activity selected = lstBxSelectedActivities.SelectedItem as Activity;
             if (selected != null)
                 txtBlkDescription.Text = selected.Description;
@@ -159,13 +159,13 @@ namespace CA2
             //clear filActivities list first
             filActivities.Clear();
 
-            if (rBtnAll.IsChecked == true)
+            if (rBtnAll.IsChecked == true)                              //checks if all activites is selected
             {
                 //display and sort both unfiltered lists
                 SortAndDisplayLists();
                 filters = false;
             }
-            else if (rBtnLand.IsChecked == true)
+            else if (rBtnLand.IsChecked == true)                        //checks for if land activities radio button is selected
             {
                 foreach (Activity activity in activities)
                 {
@@ -177,7 +177,7 @@ namespace CA2
                 }
                 SortAndDisplayFilteredLists();
             }
-            else if (rBtnWater.IsChecked == true)
+            else if (rBtnWater.IsChecked == true)                       //checks if water activities radio button is selected
             {
                 foreach (Activity activity in activities)
                 {
@@ -189,7 +189,7 @@ namespace CA2
                 }
                 SortAndDisplayFilteredLists();
             }
-            else if (rBtnAir.IsChecked == true)
+            else if (rBtnAir.IsChecked == true)                         //checks if the air activities radio button is selected
             {
                 foreach (Activity activity in activities)
                 {
@@ -277,7 +277,7 @@ namespace CA2
             SortAndDisplaySelectedLists();           
         }
         
-        private void SortAndDisplaySelectedLists()          //sorts and displays the users chosen activities and checks for duplicate dates
+        private void SortAndDisplaySelectedLists()          //sorts and displays the users selected activities and checks for duplicate dates
         {
             lstBxSelectedActivities.ItemsSource = null;
             selActivities.Sort();
@@ -291,7 +291,5 @@ namespace CA2
                 txtBlkDescription.Text = "Date Conflict detected";
             }
         }
-
-       
     }
 }

@@ -17,6 +17,7 @@ namespace CA2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml by Alasdair Macdonald
+    /// github page for history is here: https://github.com/grok23/CA2
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -129,19 +130,6 @@ namespace CA2
                 Cost = 200m
             };
 
-            Activity t1 = new Activity()
-            {
-                Name = "Helicopter Tour2",
-                
-            };
-
-            Activity t2 = new Activity()
-            {
-                
-
-            };
-
-
             //add the above activities to the all activities list
             activities.Add(l1);
             activities.Add(l2);
@@ -152,8 +140,6 @@ namespace CA2
             activities.Add(a1);
             activities.Add(a2);
             activities.Add(a3);
-            activities.Add(t1);
-            activities.Add(t2);
 
             //return the completed list
             return activities;

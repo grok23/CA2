@@ -21,7 +21,7 @@ namespace CA2
     /// </summary>
     public partial class MainWindow : Window
     {
-        //create lists to hold all activities available, selecteed activites and filtered activities
+        //create lists to hold all activities available, selected activities and filtered activities
         List<Activity> activities = new List<Activity>(); 
         List<Activity> selActivities = new List<Activity>();
         List<Activity> filActivities = new List<Activity>();
